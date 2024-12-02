@@ -1,0 +1,48 @@
+{
+  "id": "org.c9.function.bioe_134.cf.cf_shorthand",
+  "name": "cf_shorthand",
+  "description": "Converts a ConstructionFile to a string representation in standard construction file shorthand. Raises a ValueError if unrecognized steps are encountered.",
+  "type": "function",
+  "keywords": ["construction file", "DNA assembly", "bioengineering", "shorthand"],
+  "inputs": [
+    {
+      "name": "cf",
+      "type": "ConstructionFile",
+      "description": "A ConstructionFile object representing sequences and steps."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "String representation of the ConstructionFile in shorthand notation."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "cf": {
+          "sequences": [
+            ["plasmid1", {"sequence": "ATGCGTACGTTAGCGATCGGCTAGCTACGATCGATCGTAGGCTAGCGTACGATGCGT"}]
+          ],
+          "steps": [
+            {
+              "operation": "PCR",
+              "forward_oligo": "oligo1",
+              "reverse_oligo": "oligo2",
+              "template": "plasmid1",
+              "output": "fragment1"
+            }
+          ]
+        }
+      },
+      "output": {
+        "result": "Sequences:\nplasmid1       ATGCGTACGTTAGCGATCGGCTAGCTACGATCGATCGTAGGCTAGCGTACGATGCGT\n\nSteps:\npcr oligo1 oligo2 plasmid1 fragment1\n"
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "cf_functions.py",
+    "invocation": "cf_shorthand"
+  }
+}

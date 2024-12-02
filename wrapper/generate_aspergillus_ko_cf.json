@@ -1,0 +1,75 @@
+{
+  "id": "org.c9.function.bioe_134.cf.generate_aspergillus_ko_cf",
+  "name": "generate_aspergillus_ko_cf",
+  "description": "Generates a ConstructionFile to create a plasmid for knocking out a gene in Aspergillus, using pFC334 and pFC330-333 plasmids.",
+  "type": "function",
+  "keywords": ["Aspergillus", "gene knockout", "construction file", "bioengineering"],
+  "inputs": [
+    {
+      "name": "protospacer",
+      "type": "string",
+      "description": "The protospacer sequence to insert before the sgRNA scaffold."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "ConstructionFile",
+      "description": "A ConstructionFile object detailing the steps and sequences to create the knockout plasmid."
+    }
+  ],
+  "examples": [
+    {
+      "input": {"protospacer": "GGTCTAGATGCGT"},
+      "output": {
+        "result": {
+          "sequences": [
+            ["pFC334", {"sequence": "ACCAATGCTTAATCAGTGAGGCACCTATCTCAGCGATCTGTCTATTTCGTTCATCCATAGTTC..."}],
+            ["frag1-fwd", {"sequence": "GGGTTTAAU"}],
+            ["frag1-rev", {"sequence": "AGGCGGGACTACTCAGGCACTCCTGCTTTGCUCATTCGA"}],
+            ["frag2-fwd", {"sequence": "AGTAAGCUCGTCGGTCTAGATGCGT"}],
+            ["frag2-rev", {"sequence": "UAATTCTGG"}],
+            ["pFC330-333", {"sequence": "ACCAATGCTTAATCAGTGAGGCACCTATCTCAGCGATCTGTCTATTTCGTTCATCCATAGTTGCCTGACTCCCC..."}]
+          ],
+          "steps": [
+            {
+              "operation": "PCR",
+              "forward_oligo": "frag1-fwd",
+              "reverse_oligo": "frag1-rev",
+              "template": "pFC334",
+              "output": "frag1"
+            },
+            {
+              "operation": "PCR",
+              "forward_oligo": "frag2-fwd",
+              "reverse_oligo": "frag2-rev",
+              "template": "pFC334",
+              "output": "frag2"
+            },
+            {
+              "operation": "Digest",
+              "fragments": ["frag1", "frag2"],
+              "enzymes": ["UDG", "Nei"],
+              "output": ["frag1-sticky", "frag2-sticky"]
+            },
+            {
+              "operation": "Digest",
+              "fragments": ["pFC330-333"],
+              "enzymes": ["PacI", "Nt.BbvCI"],
+              "output": "pFC330-dig"
+            },
+            {
+              "operation": "Ligate",
+              "fragments": ["frag1-sticky", "frag2-sticky", "pFC330-dig"],
+              "output": "pcr-plasmid"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "cf_functions.py",
+    "invocation": "generate_aspergillus_ko_cf"
+  }
+}

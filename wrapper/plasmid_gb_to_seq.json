@@ -1,0 +1,35 @@
+{
+  "id": "org.c9.function.bioe_134.genbank.plasmid_gb_to_seq",
+  "name": "plasmid_gb_to_seq",
+  "description": "Returns the full DNA sequence of a plasmid from a GenBank file.",
+  "type": "function",
+  "keywords": ["GenBank", "plasmid", "sequence extraction", "bioinformatics"],
+  "inputs": [
+    {
+      "name": "plasmid_fp",
+      "type": "string",
+      "description": "Filepath to a GenBank file containing a plasmid sequence."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "The full DNA sequence of the plasmid."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "plasmid_fp": "plasmid.gb"
+      },
+      "output": {
+        "result": "ATGCGTACGTAGCTAGCTAGCATCGTAGCTAGCTGAC"
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "genbank_functions.py",
+    "invocation": "plasmid_gb_to_seq"
+  }
+}

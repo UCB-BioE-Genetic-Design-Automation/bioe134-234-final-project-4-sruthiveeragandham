@@ -1,0 +1,3 @@
+[submodule "PyDNA_CF_Simulator"]
+	path = PyDNA_CF_Simulator
+	url = git@github.com:UCB-BioE-Anderson-Lab/PyDNA_CF_Simulator.git

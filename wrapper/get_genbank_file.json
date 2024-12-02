@@ -1,0 +1,41 @@
+{
+  "id": "org.c9.function.bioe_134.genbank.get_genbank_file",
+  "name": "get_genbank_file",
+  "description": "Downloads a compressed GenBank file from the NCBI FTP server and extracts it.",
+  "type": "function",
+  "keywords": ["GenBank", "NCBI", "genome", "file download"],
+  "inputs": [
+    {
+      "name": "ref_seq",
+      "type": "string",
+      "description": "NCBI annotated reference sequence identifier (e.g., 'GCF_000001405')."
+    },
+    {
+      "name": "assembly",
+      "type": "string",
+      "description": "Assembly version (e.g., '39')."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "Path to the unzipped extracted GenBank file."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "ref_seq": "GCF_000001405",
+        "assembly": "39"
+      },
+      "output": {
+        "result": "GCF_000001405_39.gb"
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "genbank_functions.py",
+    "invocation": "get_genbank_file"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "org.c9.function.bioe_134.crispr.find_PAM",
+  "name": "find_PAM",
+  "description": "Finds the position of the first 'GG' PAM sequence in a DNA target sequence after the 23rd position.",
+  "type": "function",
+  "keywords": ["CRISPR", "PAM", "DNA sequence", "gene editing"],
+  "inputs": [
+    {
+      "name": "target",
+      "type": "string",
+      "description": "DNA sequence to be searched. Must consist of valid nucleotides ('A', 'T', 'C', 'G')."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "int",
+      "description": "Index of the first occurrence of 'GG' in the target sequence after the 23rd position."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "target": "ATCGGCTAGCTGACGGTACTGCGGGATCGTAGC"
+      },
+      "output": {
+        "result": 26
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "crispr_functions.py",
+    "invocation": "find_PAM"
+  }
+}

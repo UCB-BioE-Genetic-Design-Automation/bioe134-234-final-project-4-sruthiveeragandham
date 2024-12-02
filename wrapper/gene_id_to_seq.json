@@ -1,0 +1,46 @@
+{
+  "id": "org.c9.function.bioe_134.genbank.gene_id_to_seq",
+  "name": "gene_id_to_seq",
+  "description": "Returns the DNA sequence for a gene given its NCBI Gene ID.",
+  "type": "function",
+  "keywords": ["GenBank", "gene sequence", "NCBI", "bioinformatics"],
+  "inputs": [
+    {
+      "name": "gene_id",
+      "type": "string",
+      "description": "NCBI Gene ID (e.g., '69578261')."
+    },
+    {
+      "name": "genes_info",
+      "type": "dict",
+      "description": "Dictionary mapping locus tags to gene details including Gene ID and CDS."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "DNA sequence for the specified gene or an empty string if not found."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "gene_id": "69578261",
+        "genes_info": {
+          "locus_tag1": {
+            "gene_id": "69578261",
+            "CDS": "ATGCGTACGTA"
+          }
+        }
+      },
+      "output": {
+        "result": "ATGCGTACGTA"
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "genbank_functions.py",
+    "invocation": "gene_id_to_seq"
+  }
+}

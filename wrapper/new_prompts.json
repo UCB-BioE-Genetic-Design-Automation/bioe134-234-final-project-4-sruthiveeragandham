@@ -1,0 +1,232 @@
+{
+  "prompts": [
+    {
+      "request": "Where's the first 'GG' PAM site in the sequence 'GCTAGCTGACGGTAGGTACTGGGCGTAGCTA'?",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.crispr.find_PAM",
+        "arguments": {
+          "target": "GCTAGCTGACGGTAGGTACTGGGCGTAGCTA"
+        }
+      },
+      "expected_response": {
+        "index": 25
+      }
+    },
+    {
+      "request": "Find the 20 bp protospacer in 'AGCTGATGCGGTAGGTACTGGGCGTAGCTA'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.crispr.find_protospacer",
+        "arguments": {
+          "target": "AGCTGATGCGGTAGGTACTGGGCGTAGCTA"
+        }
+      },
+      "expected_response": {
+        "sequence": "GCGGTAGGTACTGGGCGTAG"
+      }
+    },
+    {
+      "request": "Download the GenBank file for reference sequence 'GCF_000001405' version '39'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.genbank.get_genbank_file",
+        "arguments": {
+          "ref_seq": "GCF_000001405",
+          "assembly": "39"
+        }
+      },
+      "expected_response": {
+        "file_path": "GCF_000001405_39.gb"
+      }
+    },
+    {
+      "request": "Extract gene information from the GenBank file 'human_genome.gb'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.genbank.extract_genes_info",
+        "arguments": {
+          "genbank_file": "human_genome.gb"
+        }
+      },
+      "expected_response": {
+        "genes_info": {
+          "locus_tag": {
+            "gene_name": "BRCA1",
+            "gene_id": "672",
+            "UTR": "ATCGTAGCTA",
+            "CDS": "ATGGCCGAC"
+          }
+        }
+      }
+    },
+    {
+      "request": "What sequence corresponds to Gene ID '69578261' in the given gene information?",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.genbank.gene_id_to_seq",
+        "arguments": {
+          "gene_id": "69578261",
+          "genes_info": {
+            "BL0001": {
+              "gene_name": "EcoRI",
+              "gene_id": "69578261",
+              "UTR": "ATGCCTG",
+              "CDS": "ATGGATCCTG"
+            }
+          }
+        }
+      },
+      "expected_response": {
+        "sequence": "ATGGATCCTG"
+      }
+    },
+    {
+      "request": "Get the full DNA sequence of the plasmid stored in 'plasmid_sample.gb'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.genbank.plasmid_gb_to_seq",
+        "arguments": {
+          "plasmid_fp": "plasmid_sample.gb"
+        }
+      },
+      "expected_response": {
+        "sequence": "ATGCGTACGTAGCTAGCTGACGTTAG"
+      }
+    },
+    {
+      "request": "Identify the protospacer in 'ATGCGGTGACCGGTACTGGGCGTGGG'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.crispr.find_protospacer",
+        "arguments": {
+          "target": "ATGCGGTGACCGGTACTGGGCGTGGG"
+        }
+      },
+      "expected_response": {
+        "sequence": "GGTGACCGGTACTGGGCGTG"
+      }
+    },
+    {
+      "request": "Extract genes from 'bacteria_genome.gb' and find the sequence for Gene ID '12345'.",
+      "expected_call": [
+        {
+          "function_id": "org.c9.function.bioe_134.genbank.extract_genes_info",
+          "arguments": {
+            "genbank_file": "bacteria_genome.gb"
+          }
+        },
+        {
+          "function_id": "org.c9.function.bioe_134.genbank.gene_id_to_seq",
+          "arguments": {
+            "gene_id": "12345",
+            "genes_info": "<result_from_extract_genes_info>"
+          }
+        }
+      ],
+      "expected_response": {
+        "sequence": "ATGCCGTAGCTGATCGT"
+      }
+    },
+    {
+  "prompts": [
+    {
+      "request": "Create a ConstructionFile to knock out a gene in Aspergillus using the protospacer 'GGTCTAGATGCGT'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.cf.generate_aspergillus_ko_cf",
+        "arguments": {
+          "protospacer": "GGTCTAGATGCGT"
+        }
+      },
+      "expected_response": {
+        "result": {
+          "sequences": [
+            ["pFC334", {"sequence": "ATG"}],
+            ["frag1-fwd", {"sequence": "GGGTTTAAU"}]
+          ],
+          "steps": [
+            {
+              "operation": "PCR",
+              "forward_oligo": "frag1-fwd",
+              "reverse_oligo": "frag1-rev",
+              "template": "pFC334",
+              "output": "frag1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": "Create a ConstructionFile for an Aspergillus gene knockout using the protospacer sequence 'GGTCTAGATGCGT'.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.cf.generate_aspergillus_ko_cf",
+        "arguments": {
+          "protospacer": "GGTCTAGATGCGT"
+        }
+      },
+      "expected_response": {
+        "result": {
+          "sequences": [
+            ["pFC334", {"sequence": "ACCAATGCTTAATCAGTGAGGCACCTATCTCAGCGATCTGTCTATTTCGTTCATCCATAGTTC..."}],
+            ["frag1-fwd", {"sequence": "GGGTTTAAU"}],
+            ["frag1-rev", {"sequence": "AGGCGGGACTACTCAGGCACTCCTGCTTTGCUCATTCGA"}],
+            ["frag2-fwd", {"sequence": "AGTAAGCUCGTCGGTCTAGATGCGT"}],
+            ["frag2-rev", {"sequence": "UAATTCTGG"}],
+            ["pFC330-333", {"sequence": "ACCAATGCTTAATCAGTGAGGCACCTATCTCAGCGATCTGTCTATTTCGTTCATCCATAGTTGCCTGACTCCCC..."}]
+          ],
+          "steps": [
+            {
+              "operation": "PCR",
+              "forward_oligo": "frag1-fwd",
+              "reverse_oligo": "frag1-rev",
+              "template": "pFC334",
+              "output": "frag1"
+            },
+            {
+              "operation": "PCR",
+              "forward_oligo": "frag2-fwd",
+              "reverse_oligo": "frag2-rev",
+              "template": "pFC334",
+              "output": "frag2"
+            },
+            {
+              "operation": "Digest",
+              "fragments": ["frag1", "frag2"],
+              "enzymes": ["UDG", "Nei"],
+              "output": ["frag1-sticky", "frag2-sticky"]
+            },
+            {
+              "operation": "Digest",
+              "fragments": ["pFC330-333"],
+              "enzymes": ["PacI", "Nt.BbvCI"],
+              "output": "pFC330-dig"
+            },
+            {
+              "operation": "Ligate",
+              "fragments": ["frag1-sticky", "frag2-sticky", "pFC330-dig"],
+              "output": "ko-plasmid"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": "Convert this ConstructionFile to shorthand: A plasmid with the sequence 'ATGCGTACGTTAGCGATCGGCTAGCTACGATCGATCGTAGGCTAGCGTACGATGCGT' and a PCR step using oligo1, oligo2, and plasmid1 to produce fragment1.",
+      "expected_call": {
+        "function_id": "org.c9.function.bioe_134.cf.cf_shorthand",
+        "arguments": {
+          "cf": {
+            "sequences": [
+              ["plasmid1", {"sequence": "ATGCGTACGTTAGCGATCGGCTAGCTACGATCGATCGTAGGCTAGCGTACGATGCGT"}]
+            ],
+            "steps": [
+              {
+                "operation": "PCR",
+                "forward_oligo": "oligo1",
+                "reverse_oligo": "oligo2",
+                "template": "plasmid1",
+                "output": "fragment1"
+              }
+            ]
+          }
+        }
+      },
+      "expected_response": {
+        "result": "Sequences:\nplasmid1       ATGCGTACGTTAGCGATCGGCTAGCTACGATCGATCGTAGGCTAGCGTACGATGCGT\n\nSteps:\npcr oligo1 oligo2 plasmid1 fragment1\n"
+      }
+    }
+  ]
+}

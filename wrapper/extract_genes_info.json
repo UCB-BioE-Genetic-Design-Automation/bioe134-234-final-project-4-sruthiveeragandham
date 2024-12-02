@@ -1,0 +1,42 @@
+{
+  "id": "org.c9.function.bioe_134.genbank.extract_genes_info",
+  "name": "extract_genes_info",
+  "description": "Extracts gene information (name, NCBI gene ID, UTR, CDS) from a GenBank file.",
+  "type": "function",
+  "keywords": ["GenBank", "gene extraction", "NCBI", "bioinformatics"],
+  "inputs": [
+    {
+      "name": "genbank_file",
+      "type": "string",
+      "description": "Path to the GenBank file to parse."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Dict[str, Dict[str, Optional[str]]]",
+      "description": "Dictionary with locus tags as keys and gene details (name, gene ID, UTR, CDS) as values."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "genbank_file": "GCF_000001405_39.gb"
+      },
+      "output": {
+        "result": {
+          "locus_tag1": {
+            "gene_name": "geneA",
+            "gene_id": "12345",
+            "UTR": "ATGCGT",
+            "CDS": "ATGCGTACTGAA"
+          }
+        }
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "genbank_functions.py",
+    "invocation": "extract_genes_info"
+  }
+}

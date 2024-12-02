@@ -1,0 +1,35 @@
+{
+  "id": "org.c9.function.bioe_134.crispr.find_protospacer",
+  "name": "find_protospacer",
+  "description": "Identifies the 20 bp protospacer sequence in a DNA target sequence located immediately before the PAM sequence.",
+  "type": "function",
+  "keywords": ["CRISPR", "protospacer", "PAM", "DNA sequence", "gene editing"],
+  "inputs": [
+    {
+      "name": "target",
+      "type": "string",
+      "description": "DNA sequence to be searched. Must consist of valid nucleotides ('A', 'T', 'C', 'G')."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "The 20 base pair protospacer sequence found immediately before the PAM sequence."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "target": "ATCGGCTAGCTGACGGTACTGCGGGATCGTAGC"
+      },
+      "output": {
+        "result": "CTGACGGTACTGCGGGATCG"
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "Python",
+    "source": "crispr_functions.py",
+    "invocation": "find_protospacer"
+  }
+}
